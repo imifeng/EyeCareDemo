@@ -18,25 +18,24 @@ import com.finn.eyecaredemo.common.Constant;
 public class DialogUtil {
 
     public static void showAlert(Context context, String message) {
-        if (message.isEmpty()) {
+        if (context == null ||  message.isEmpty()) {
             return;
         }
-
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View layout = inflater.inflate(R.layout.dialog_custom_layout, null);
-
         FrameLayout eye_content = layout.findViewById(R.id.eye_content);
+        TextView tv_title = layout.findViewById(R.id.tv_title);
+        TextView tv_message = layout.findViewById(R.id.tv_message);
+        TextView tv_ok = layout.findViewById(R.id.tv_ok);
+        //设置护眼模式蒙层色值
         if (Constant.IS_EYE_CARE_OPEN) {
             eye_content.setBackgroundColor(EyeCareColorUtil.getFilterColor(30));
         } else {
             eye_content.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        TextView tv_title = layout.findViewById(R.id.tv_title);
-        TextView tv_message = layout.findViewById(R.id.tv_message);
-        TextView tv_ok = layout.findViewById(R.id.tv_ok);
         tv_message.setText(message);
         builder.setView(layout);
         final AlertDialog mAlertDialog = builder.create();

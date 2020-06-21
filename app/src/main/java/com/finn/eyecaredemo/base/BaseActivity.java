@@ -1,6 +1,5 @@
 package com.finn.eyecaredemo.base;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.finn.eyecaredemo.common.Constant;
-import com.finn.eyecaredemo.utils.DialogUtil;
 import com.finn.eyecaredemo.utils.EyeCareColorUtil;
 
 import butterknife.ButterKnife;
@@ -69,6 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        //onRestart中用来返回到已存在页面时，刷新护眼蒙层色值
         if (Constant.IS_EYE_CARE_OPEN){
             openEye();
         }else {
@@ -99,23 +98,17 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 开启护眼模式
      */
     public void openEye() {
-        eyeCareView.setBackgroundColor(EyeCareColorUtil.getFilterColor(30));
+        if (eyeCareView != null) {
+            eyeCareView.setBackgroundColor(EyeCareColorUtil.getFilterColor(30));
+        }
     }
 
     /**
      * 关闭护眼模式
      */
     public void closeEye() {
-        eyeCareView.setBackgroundColor(Color.TRANSPARENT);
-    }
-
-    /**
-     * Set font size, language
-     * @return
-     */
-    @Override
-    public Resources getResources() {
-        //Set font size, language
-        return super.getResources();
+        if (eyeCareView != null) {
+            eyeCareView.setBackgroundColor(Color.TRANSPARENT);
+        }
     }
 }
