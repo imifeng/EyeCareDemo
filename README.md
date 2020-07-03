@@ -1,5 +1,5 @@
 # EyeCareDemo
-
+Android 护眼模式的简单实现
 
 * Activity:获取content根布局，在上面添加一层浮层，默认透明，开启护眼模式设置护眼色值。
 
